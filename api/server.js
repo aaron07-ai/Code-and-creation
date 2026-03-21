@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
-const Message = require('./message'); // Importing the schema we just made
+const Message = require('./Message'); // Importing the schema we just made
 
 const app = express();
 
@@ -33,4 +33,4 @@ app.post('/api/contact', async (req, res) => {
 
 // 3. START SERVER
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Backend running on port ${PORT}`));
+module.exports = app;

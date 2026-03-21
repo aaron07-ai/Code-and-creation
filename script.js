@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 3. CONTACT FORM HANDLING
-  // Find the form in your script.js
+   // Find the form in your script.js
 const form = document.getElementById('collab-form');
 
 if (form) {
@@ -57,14 +57,13 @@ if (form) {
 
         try {
             // 2. SEND the data to your Node.js server
-            const response = await fetch('http://localhost:5000/api/contact', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            });
-
+          const response = await fetch('/api/contact', {  // <--- Starts here
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(formData)
+}); // <--- Did you forget this semicolon or parenthesis?
             const result = await response.json();
 
             // 3. Handle the result
