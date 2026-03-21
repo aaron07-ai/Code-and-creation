@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code & Motion | Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="cursor-glow"></div>
+
+    <nav>
+        <div class="logo">CODE<span>&</span>MOTION</div>
+        <div class="nav-links">
+            <a href="#expertise">Expertise</a>
+            <a href="#connect" class="nav-btn">Collab</a>
+        </div>
+    </nav>
+
+    <header>
+        <div class="video-container">
+            <video autoplay muted loop playsinline class="bg-video">
+                <source src="bg video.mp4" type="video/mp4">
+            </video>
+            <div class="video-overlay"></div>
+        </div>
+
+        <div class="hero-grid container">
+            
+            <div class="hero-content">
+                <span class="badge">Digital Architect & Visual Artist</span>
+                <h1>Engineering logic. <br><span class="text-gradient">Capturing stories.</span></h1>
+                <p class="subtitle">A fusion of C++ performance and cinematic visual mastery.</p>
+                
+                <div class="hero-btns">
+                    <a href="https://www.instagram.com/aaron.mp4_?igsh=MWczZjZwZHM0NjZqNQ==" target="_blank" class="insta-pill">Check out my works</a>
+                </div>
+            </div>
+
+            <div class="hero-picture reveal active">
+                <img src="profile.jpg" alt="Aaron Shanu">
+            </div>
+
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="expertise" class="split-grid reveal">
+            <div class="column">
+                <span class="label">Developer</span>
+                <h3>Code</h3>
+                <p class="tagline">Robust logic. Scalable data.</p>
+                <ul class="skill-list">
+                    <li><span class="num">01</span> C++ Systems</li>
+                    <li><span class="num">02</span> SQL Architecture</li>
+                    <li><span class="num">03</span> MongoDB NoSQL</li>
+                </ul>
+            </div>
+
+            <div class="column">
+                <span class="label">Artist</span>
+                <h3>Creations</h3>
+                <p class="tagline">Cinematic vision. Digital mastery.</p>
+                <ul class="skill-list">
+                    <li><span class="num">04</span> Video & Photo Editing</li>
+                    <li><span class="num">05</span> Videography & Photography</li>
+                    <li><span class="num">06</span> Colour Grading</li>
+                    <li><span class="num">07</span> Album Designing</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="connect" class="reveal">
+            <div class="contact-box">
+                <h2>Let's Collab.</h2>
+                <form id="collab-form">
+                    <div class="form-group">
+                        <input type="text" id="name" placeholder="Your Name" required>
+                        <input type="email" id="email" placeholder="Your Email" required>
+                    </div>
+                    <textarea id="message" placeholder="Project details or collaboration ideas..." rows="5" required></textarea>
+                    <button type="submit" class="submit-btn">Initialize Connection</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 CODE & MOTION | Logically Creative</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
