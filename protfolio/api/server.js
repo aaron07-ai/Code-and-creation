@@ -17,31 +17,19 @@ mongoose.connect(process.env.MONGO_URI)
     .catch(err => console.log("❌ Database Connection Error:", err));
 
 // 2. THE "POST" ROUTE (The Receiver)
-// --- REPLACE THIS BLOCK ---
 app.post('/api/contact', async (req, res) => {
     try {
         const { name, email, message } = req.body;
-
-        // Ensure the data is coming through
-        console.log("New message received from:", name);
-
-        const newMessage = new Message({ name, email, message });
-
-        // This line is the most important for MongoDB Atlas!
-        await newMessage.save(); 
-
-        console.log("✅ Data saved to MongoDB successfully!");
         
-        res.status(200).json({ 
-            success: true, 
-            message: "Connection initialized! Thanks " + name + ", I'll get back to you soon." 
-        });
+        // Create a new entry in the database
+        const newMessage = new Message({ name, email, message });
+        await newMessage.save();
+
+        res.status(201).json({ success: true, message: "Message stored in MongoDB!" });
     } catch (error) {
-        console.error("❌ MongoDB Save Error:", error);
-        res.status(500).json({ success: false, error: "Database save failed." });
+        res.status(500).json({ success: false, error: "Server Error" });
     }
 });
-// --- END OF REPLACEMENT ---
 
 // 3. START SERVER
 const PORT = process.env.PORT || 5000;

@@ -41,44 +41,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 3. CONTACT FORM HANDLING
-   // Find the form in your script.js
-const form = document.getElementById('collab-form');
-
-if (form) {
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        // 1. Collect the data from the form
-        const formData = {
-            name: document.getElementById('name').value,
-            email: document.getElementById('email').value,
-            message: document.getElementById('message').value
-        };
-
-        try {
-            // 2. SEND the data to your Node.js server
-          const response = await fetch('/api/contact', {  // <--- Starts here
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(formData)
-}); // <--- Did you forget this semicolon or parenthesis?
-            const result = await response.json();
-
-            // 3. Handle the result
-            if (result.success) {
-                alert(`Success! Data stored in MongoDB.`);
-                form.reset();
-            } else {
-                alert("Server received it, but failed to save.");
-            }
-        } catch (error) {
-            console.error("Error:", error);
-            alert("Could not connect to the server. Is node server.js running?");
-        }
-    });
-}
+    const form = document.getElementById('collab-form');
+    if (form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const userName = document.getElementById('name').value;
+            
+            // Success feedback
+            alert(`Connection initialized! Thanks ${userName}, I'll get back to you soon.`);
+            
+            // Reset the form fields
+            form.reset();
+        });
+    }
 
     // Console log to confirm everything is running
     console.log("Code & Motion Portfolio: Interactive Systems Active.");
