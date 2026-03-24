@@ -1,48 +1,54 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');
-require('dotenv').config();
-const Message = require('./Message'); // Importing the schema we just made
+const dotenv = require('dotenv');
+const path = require('path');
+const Message = require('./Message.js');
+dotenv.config();
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
-// MIDDLEWARE
-app.use(cors()); // Allows your frontend to talk to this server
-app.use(express.json()); // Allows the server to read JSON data
+// Middleware
+app.use(express.json());
+app.use(express.static(path.join(__dirname)));
 
-// 1. DATABASE CONNECTION
-// Make sure your .env file has: MONGO_URI=your_mongodb_link
-mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log("✅ Database Connected: Logic & Motion Engine Ready"))
-    .catch(err => console.log("❌ Database Connection Error:", err));
+// MongoDB Connection
+mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(() => {
+    console.log('Database connected');
+}).catch(err => {
+    console.error('Database connection error:', err);
+});
 
-// 2. THE "POST" ROUTE (The Receiver)
-// --- REPLACE THIS BLOCK ---
-app.post('/api/contact', async (req, res) => {
+// Schema for collaboration messages
+const collabSchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    email: { type: String, required: true },
+    message: { type: String, required: true },
+    date: { type: Date, default: Date.now }
+});
+
+const Collab = mongoose.model('Collab', collabSchema);
+
+// Routes
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+app.post('/submit', async (req, res) => {
     try {
         const { name, email, message } = req.body;
-
-        // Ensure the data is coming through
-        console.log("New message received from:", name);
-
-        const newMessage = new Message({ name, email, message });
-
-        // This line is the most important for MongoDB Atlas!
-        await newMessage.save(); 
-
-        console.log("✅ Data saved to MongoDB successfully!");
-        
-        res.status(200).json({ 
-            success: true, 
-            message: "Connection initialized! Thanks " + name + ", I'll get back to you soon." 
-        });
+        const newCollab = new Collab({ name, email, message });
+        await newCollab.save();
+        res.status(200).json({ message: 'Data inserted successfully' });
     } catch (error) {
-        console.error("❌ MongoDB Save Error:", error);
-        res.status(500).json({ success: false, error: "Database save failed." });
+        console.error('Error inserting data:', error);
+        res.status(500).json({ error: 'Failed to insert data' });
     }
 });
-// --- END OF REPLACEMENT ---
 
-// 3. START SERVER
-const PORT = process.env.PORT || 5000;
-module.exports = app;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});

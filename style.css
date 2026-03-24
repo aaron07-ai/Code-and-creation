@@ -58,7 +58,7 @@ header {
 
 .hero-content { text-align: left; }
 h1 { font-size: clamp(2rem, 6vw, 4.2rem); font-weight: 800; line-height: 1.1; margin: 15px 0; }
-.text-gradient { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.text-gradient { background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 .subtitle { color: var(--dim); font-size: 1rem; max-width: 480px; margin-bottom: 30px; }
 .badge { color: var(--accent); font-weight: 800; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; }
 
