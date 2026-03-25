@@ -80,8 +80,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
             } catch (err) {
-                console.error('❌ FETCH ERROR:', err);
-                alert("Server error: " + err.message);
+                console.error("Network Error:", err);
+                alert("Network error: " + (err && err.message ? err.message : err));
             }
         });
 

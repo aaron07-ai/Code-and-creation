@@ -23,8 +23,8 @@ mongoose.connect(process.env.MONGO_URI, {
 }).then(() => {
     console.log('✓ Database connected successfully');
 }).catch(err => {
-    console.error('✗ Database connection error:', err.message);
-    process.exit(1);
+    console.error('✗ Database connection error:', err && err.message ? err.message : err);
+    console.warn('⚠️  Continuing without database connection. The server will still serve static files and accept requests, but data persistence will be disabled until a valid MONGO_URI is provided.');
 });
 
 // Schema for collaboration messages
